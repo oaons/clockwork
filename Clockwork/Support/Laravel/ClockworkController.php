@@ -30,6 +30,7 @@ class ClockworkController extends Controller
 
 	public function webRedirect()
 	{
-		return new RedirectResponse('/__clockwork/app');
+        $routePrefix = $this->app['clockwork.support']->getConfig('route_prefix', '');
+		return new RedirectResponse($routePrefix . '/__clockwork/app');
 	}
 }

@@ -134,15 +134,17 @@ class ClockworkServiceProvider extends ServiceProvider
 
 	public function registerRoutes()
 	{
-		$this->app['router']->get('/__clockwork/{id}/{direction?}/{count?}', 'Clockwork\Support\Laravel\ClockworkController@getData')
+	    $routePrefix = $this->app['clockwork.support']->getConfig('route_prefix', '');
+		$this->app['router']->get($routePrefix . '/__clockwork/{id}/{direction?}/{count?}', 'Clockwork\Support\Laravel\ClockworkController@getData')
 			->where('id', '([0-9-]+|latest)')->where('direction', '(next|previous)')->where('count', '\d+');
 	}
 
 	public function registerWebRoutes()
 	{
-		$this->app['router']->get('/__clockwork', 'Clockwork\Support\Laravel\ClockworkController@webRedirect');
-		$this->app['router']->get('/__clockwork/app', 'Clockwork\Support\Laravel\ClockworkController@webIndex');
-		$this->app['router']->get('/__clockwork/assets/{path}', 'Clockwork\Support\Laravel\ClockworkController@webAsset')->where('path', '.+');
+        $routePrefix = $this->app['clockwork.support']->getConfig('route_prefix', '');
+		$this->app['router']->get($routePrefix . '/__clockwork', 'Clockwork\Support\Laravel\ClockworkController@webRedirect');
+		$this->app['router']->get($routePrefix . '/__clockwork/app', 'Clockwork\Support\Laravel\ClockworkController@webIndex');
+		$this->app['router']->get($routePrefix . '/__clockwork/assets/{path}', 'Clockwork\Support\Laravel\ClockworkController@webAsset')->where('path', '.+');
 	}
 
 	public function provides()

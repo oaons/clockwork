@@ -30,6 +30,8 @@ return [
 
 	'web' => true,
 
+    'route_prefix' => '',
+
 	/*
 	|--------------------------------------------------------------------------
 	| Enable data collection, when Clockwork is disabled
@@ -109,6 +111,8 @@ return [
 	'filter_uris' => [
 		'/__clockwork/.*', // disable collecting data for clockwork-web assets
 	],
+
+    'only_uris' => false,
 
 	/*
 	|--------------------------------------------------------------------------
